@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: tx-smtp-relay
-          image: applariat/tx-smtp-relay
+          image: duboisf/tx-smtp-relay
           env:
             - name: TX_SMTP_RELAY_HOST
               valueFrom:
@@ -36,3 +36,35 @@ spec:
                   key: tx-smtp-relay-password
           ports:
             - containerPort: 25
+          securityContext:
+            readOnlyRootFilesystem: true
+          volumeMounts:
+          - mountPath: /etc/postfix
+            name: etc-postfix
+          - mountPath: /run
+            name: run
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /var/lib/postfix
+            name: var-lib-postfix
+          - mountPath: /var/log
+            name: var-log
+          - mountPath: /var/run
+            name: var-run
+          - mountPath: /var/spool/postfix
+            name: var-spool-postfix
+      volumes:
+      - name: etc-postfix
+        emptyDir: {}
+      - name: run
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
+      - name: var-log
+        emptyDir: {}
+      - name: var-lib-postfix
+        emptyDir: {}
+      - name: var-run
+        emptyDir: {}
+      - name: var-spool-postfix
+        emptyDir: {}
