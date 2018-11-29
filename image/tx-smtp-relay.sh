@@ -5,8 +5,6 @@ TX_SMTP_RELAY_MYHOSTNAME=${TX_SMTP_RELAY_MYHOSTNAME?Missing env var TX_SMTP_RELA
 TX_SMTP_RELAY_USERNAME=${TX_SMTP_RELAY_USERNAME?Missing env var TX_SMTP_RELAY_USERNAME}
 TX_SMTP_RELAY_PASSWORD=${TX_SMTP_RELAY_PASSWORD?Missing env var TX_SMTP_RELAY_PASSWORD}
 
-# Having a readonly fs in the container, fix some things
-cp -r /etc/postfix-readonly/* /etc/postfix/
 chmod 2755 /var/spool/postfix
 chown postfix:root /var/lib/postfix
 chmod 0700 /var/lib/postfix

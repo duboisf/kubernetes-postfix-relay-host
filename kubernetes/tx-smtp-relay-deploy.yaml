@@ -39,8 +39,6 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
           volumeMounts:
-          - mountPath: /etc/postfix
-            name: etc-postfix
           - mountPath: /run
             name: run
           - mountPath: /tmp
@@ -54,8 +52,6 @@ spec:
           - mountPath: /var/spool/postfix
             name: var-spool-postfix
       volumes:
-      - name: etc-postfix
-        emptyDir: {}
       - name: run
         emptyDir: {}
       - name: tmp
