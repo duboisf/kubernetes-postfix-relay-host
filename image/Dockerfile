@@ -11,13 +11,11 @@ RUN apk add --no-cache postfix rsyslog supervisor \
     # http://www.postfix.org/COMPATIBILITY_README.html#smtputf8_enable
     && postconf 'smtputf8_enable = no' \
     # This makes sure the message id is set. If this is set to no dkim=fail will happen.
-    && postconf 'always_add_missing_headers = yes' \
-    # We are going to run the container as readonly
-    # The entrypoint is going to copy /etc/postfix-readonly to /etc/postfix
-    # (/etc/postfix is going to be writable)
-    && mv /etc/postfix /etc/postfix-readonly
+    && postconf 'always_add_missing_headers = yes'
 
 COPY . /
+
+VOLUME /etc/postfix
 
 EXPOSE 25
 
